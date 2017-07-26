@@ -1,5 +1,5 @@
 #!/bin/bash
-
+import yampy
 import os
 import requests
 import json
@@ -10,9 +10,15 @@ from dotenv import load_dotenv, find_dotenv
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
+from time import sleep
 
 
 load_dotenv(find_dotenv())
+
+yammer = yampy.Yammer(access_token=os.environ.get('YAMMER_TOKEN'))
+
+
+
 
 
 recipient_email =  os.environ.get('RECIPIENT_EMAIL')
@@ -35,6 +41,7 @@ def employee_anniversary(per_page, current_page, anniversaries=[]):
 	print "Current Page: " + str(current_page)
 	count = 1
 
+	sleep(35)
 	for row in json_data['profiles']:
 		today = datetime.today()
 		if row['start_date']:
@@ -44,14 +51,24 @@ def employee_anniversary(per_page, current_page, anniversaries=[]):
 			current_year_employment_date = employed_date_obj + relativedelta(years=year_difference)
 			days_left = (current_year_employment_date - today).days + 1
 
+			employee = { "fullname": str(row["first_name"], ) + " " + str(row["last_name"],), "anniversary_date": current_year_employment_date.strftime('%Y-%m-%d'), "employed_date": employed_date_obj.strftime('%Y-%m-%d'), "number_of_years": year_difference }
+
+			# Post to Yammer
+			if days_left == 0:
+				if count % 8 == 0:
+					sleep(35)
+				yammer_post = "Happy Rimoniversary to " + employee['fullname'] + ". Today marks " + str(year_difference) + " years with the firm." 
+				yammer.messages.create(yammer_post, group_id=os.environ.get('YAMMER_GROUP_ID'),
+                       topics=["Rimonniversary"])
+				count = count + 1
+
 			if days_left == 14:
-				employee = { "fullname": str(row["first_name"], ) + " " + str(row["last_name"],), "anniversary_date": current_year_employment_date.strftime('%Y-%m-%d'), "employed_date": employed_date_obj.strftime('%Y-%m-%d'), "number_of_years": year_difference }
 				anniversaries.append(employee)
 
 		else:
 			print ""
 			
-		count = count + 1
+		
 	return (anniversaries, (total_records > (per_page*current_page)))
 
 
@@ -95,4 +112,10 @@ if total_celebrants > 0:
 	print response, " - Sent email to ", recipient_email
 	server.quit()
 
-	
+# 	Keys and tokens
+# Client ID ?   47iOrJ1MKNSlKxmeJKaoQ
+# Client secret ?   ygmBdzYyH0rJh9ouVOXO69fOppAuh5b149gTx21VZE
+# Expected redirect ?   https://www.rimonlaw.com
+# Here is your personal token for testing. Please copy it somewhere safe as this will disappear when you change page:
+
+# 123918-cf82tNgqfZMZk4ArpRF7A
