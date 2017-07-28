@@ -19,8 +19,6 @@ yammer = yampy.Yammer(access_token=os.environ.get('YAMMER_TOKEN'))
 
 
 
-
-
 recipient_email =  os.environ.get('RECIPIENT_EMAIL')
 from_email = os.environ.get('SENDER_EMAIL')
 
@@ -58,8 +56,7 @@ def employee_anniversary(per_page, current_page, anniversaries=[]):
 				if count % 8 == 0:
 					sleep(35)
 				yammer_post = "Happy Rimoniversary to " + employee['fullname'] + ". Today marks " + str(year_difference) + " years with the firm." 
-				yammer.messages.create(yammer_post, group_id=os.environ.get('YAMMER_GROUP_ID'),
-                       topics=["Rimonniversary"])
+				yammer.messages.create(yammer_post, topics=["Rimonniversary"])
 				count = count + 1
 
 			if days_left == 14:
