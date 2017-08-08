@@ -52,14 +52,14 @@ def employee_anniversary(per_page, current_page, anniversaries=[]):
 			employee = { "fullname": str(row["first_name"], ) + " " + str(row["last_name"],), "anniversary_date": current_year_employment_date.strftime('%Y-%m-%d'), "employed_date": employed_date_obj.strftime('%Y-%m-%d'), "number_of_years": year_difference }
 
 			# Post to Yammer
-			if days_left == 0:
+			if days_left == 0 && year_difference > 0:
 				if count % 8 == 0:
 					sleep(35)
-				yammer_post = "Happy Rimoniversary to " + employee['fullname'] + ". Today marks " + str(year_difference) + " years with the firm." 
+				yammer_post = "Happy Rimoniversary to " + employee['fullname'] + ". Today marks " + str(year_difference) + " year(s) with the firm." 
 				yammer.messages.create(yammer_post, topics=["Rimonniversary"])
 				count = count + 1
 
-			if days_left == 14:
+			if days_left == 14 && year_difference > 0:
 				anniversaries.append(employee)
 
 		else:
