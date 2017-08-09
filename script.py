@@ -23,7 +23,7 @@ recipient_email =  os.environ.get('RECIPIENT_EMAIL')
 from_email = os.environ.get('SENDER_EMAIL')
 
 def employee_anniversary(per_page, current_page, anniversaries=[]):
-	url = 'https://rimon.namely.com/api/v1/profiles.json?filter[status]=active&per_page=' + str(per_page) + '&page=' + str(current_page)
+	url = 'https://rimon.namely.com/api/v1/profiles.json?filter[user_status]=active&per_page=' + str(per_page) + '&page=' + str(current_page)
 
 	token = os.environ.get('TOKEN')
 
