@@ -33,7 +33,7 @@ def employee_anniversary(per_page, current_page, anniversaries=[]):
 	response = requests.request("GET", url, data=payload, headers=headers)
 
 	json_data = json.loads(response.text)
-	total_records = json_data['meta']['count']
+	total_records = json_data['meta']['total_count']
 
 	print "Total records: " + str(total_records) + "\n"
 	print "Current Page: " + str(current_page)
@@ -92,7 +92,10 @@ if total_celebrants > 0:
 	msg_body = "<p>Hey there,</p><p><b>The following people have their Rimoniversaries coming up in just two weeks! Please send the Rimoniversary gift to arrive by the scheduled date. Thank you.</b></p>"
 	for celebrant_info in anniversaries:
 		msg_body += "<p><b>" + celebrant_info['fullname'] + "</b>   -   Rimoniversary Date: " + celebrant_info['anniversary_date'] + " </p>"
-		# msg_body += "<p><b>" + celebrant_info['fullname'] + "</b> - Rimoniversary Date: " + celebrant_info['anniversary_date'] + " <b>" + str(celebrant_info['number_of_years']) + "</b> year(s) in service</p>"
+		if celebrant_info['dietary_restrictions'] != None:
+			msg_body += "<p><b>Allergies:</b> " + celebrant_info['dietary_restrictions'] + "</b></p><br>"
+
+
 	msg = MIMEMultipart()
 	msg['From'] = from_email
 	msg['To'] = recipient_email
@@ -108,4 +111,6 @@ if total_celebrants > 0:
 	response = server.sendmail(from_email, recipient_email, text)
 	print response, " - Sent email to ", recipient_email
 	server.quit()
+
+
 
