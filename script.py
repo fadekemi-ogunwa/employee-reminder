@@ -93,7 +93,7 @@ if total_celebrants > 0:
 	for celebrant_info in anniversaries:
 		msg_body += "<p><b>" + celebrant_info['fullname'] + "</b>   -   Rimoniversary Date: " + celebrant_info['anniversary_date'] + " </p>"
 		if celebrant_info['dietary_restrictions'] != None:
-			msg_body += "<p><b>Allergies:</b> " + celebrant_info['dietary_restrictions'] + "</b></p><br>"
+			msg_body += "<p><b>Dietary Restrictions:</b> " + celebrant_info['dietary_restrictions'] + "</b></p><br>"
 
 
 	msg = MIMEMultipart()
