@@ -49,7 +49,7 @@ def employee_anniversary(per_page, current_page, anniversaries=[]):
 			current_year_employment_date = employed_date_obj + relativedelta(years=year_difference)
 			days_left = (current_year_employment_date - today).days + 1
 
-			employee = { "fullname": str(row["first_name"], ) + " " + str(row["last_name"],), "anniversary_date": current_year_employment_date.strftime('%Y-%m-%d'), "employed_date": employed_date_obj.strftime('%Y-%m-%d'), "number_of_years": year_difference }
+			employee = { "fullname": str(row["first_name"], ) + " " + str(row["last_name"],), "anniversary_date": current_year_employment_date.strftime('%Y-%m-%d'), "employed_date": employed_date_obj.strftime('%Y-%m-%d'), "number_of_years": year_difference, "Dietary_Restrictions": row['dietary_restrictions']}
 
 			# Post to Yammer
 			if days_left == 0 and year_difference > 0:
@@ -92,7 +92,7 @@ if total_celebrants > 0:
 	msg_body = "<p>Hey there,</p><p><b>The following people have their Rimoniversaries coming up in just two weeks! Please send the Rimoniversary gift to arrive by the scheduled date. Thank you.</b></p>"
 	for celebrant_info in anniversaries:
 		msg_body += "<p><b>" + celebrant_info['fullname'] + "</b>   -   Rimoniversary Date: " + celebrant_info['anniversary_date'] + " </p>"
-		if celebrant_info['dietary_restrictions'] != None:
+		if celebrant_info['Dietary_Restrictions'] != None:
 			msg_body += "<p><b>Dietary Restrictions:</b> " + celebrant_info['dietary_restrictions'] + "</b></p><br>"
 
 
