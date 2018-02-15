@@ -13,6 +13,7 @@ from email.MIMEText import MIMEText
 from time import sleep
 
 
+
 load_dotenv(find_dotenv())
 
 yammer = yampy.Yammer(access_token=os.environ.get('YAMMER_TOKEN'))
@@ -49,7 +50,7 @@ def employee_anniversary(per_page, current_page, anniversaries=[]):
 			current_year_employment_date = employed_date_obj + relativedelta(years=year_difference)
 			days_left = (current_year_employment_date - today).days + 1
 
-			employee = { "fullname": str(row["first_name"], ) + " " + str(row["last_name"],), "anniversary_date": current_year_employment_date.strftime('%Y-%m-%d'), "employed_date": employed_date_obj.strftime('%Y-%m-%d'), "number_of_years": year_difference, "Dietary_Restrictions": row['dietary_restrictions']}
+			employee = { "fullname": str(row["first_name"], ) + " " + str(row["last_name"],), "anniversary_date": current_year_employment_date.strftime('%Y-%m-%d'), "employed_date": employed_date_obj.strftime('%Y-%m-%d'), "number_of_years": year_difference, "Dietary_Restrictions": row["dietary_restrictions"]}
 
 			# Post to Yammer
 			if days_left == 0 and year_difference > 0:
@@ -93,7 +94,7 @@ if total_celebrants > 0:
 	for celebrant_info in anniversaries:
 		msg_body += "<p><b>" + celebrant_info['fullname'] + "</b>   -   Rimoniversary Date: " + celebrant_info['anniversary_date'] + " </p>"
 		if celebrant_info['Dietary_Restrictions'] != None:
-			msg_body += "<p><b>Dietary Restrictions:</b> " + celebrant_info['dietary_restrictions'] + "</b></p><br>"
+			msg_body += "<p><b>Dietary Restrictions:</b> " + celebrant_info['Dietary_Restrictions'] + "</b></p><br>"
 
 
 	msg = MIMEMultipart()
