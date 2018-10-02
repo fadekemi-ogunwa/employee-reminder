@@ -122,7 +122,7 @@ if today.day == 2:
 
 	msg = MIMEMultipart()
 	msg['From'] = from_email
-	msg['To'] = 'None'
+	# msg['To'] = 'None'
 	msg['Bcc'] = 'attorneys@rimonlaw.com,legalsupport@rimonlaw.com'
 	import os
 	msg['Subject'] = "Remember to enter time for " + display
