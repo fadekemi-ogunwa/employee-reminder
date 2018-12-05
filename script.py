@@ -118,7 +118,7 @@ today = datetime.today()
 if today.day == 2:
 	one_month_ago = datetime.now() - relativedelta(months=1)
 	display = one_month_ago.strftime("%B")
-	msg_body = '<p>Using the link below, please take a moment to confirm whether all your time has been entered for the most recently-ended month:</p><b><p><a href="http://ift.tt/2m4O9Eq">http://ift.tt/2m4O9Eq</a>(Please note that this app requires you to be signed into your Office365 account to function - click on the Office365 link in OneLogin to sign in.)</b></p><p>Even if you have not finished entering your time, please respond by entering "No". Once you have completed your time-entry, please amend your response by clicking on the link in this e-mail, or by clicking the "Rimon-TEV" (time-entry verification) button in your OneLogin portal. If you have any technical questions, please contact conflicts@rimonlaw.com. Thank you.</p>'
+	msg_body = '<p>Using the link below, please take a moment to confirm whether all your time has been entered for the most recently-ended month:</p><b><p><a href="https://myapps.microsoft.com">https://myapps.microsoft.com</a>(Please note that this app requires you to be signed into your Office365 account to function)</b></p><p>Even if you have not finished entering your time, please respond by entering "No". Once you have completed your time-entry, please amend your response by clicking on the link in this e-mail, or by clicking the "Rimon-TEV" (time-entry verification) button in your OneLogin portal. If you have any technical questions, please contact conflicts@rimonlaw.com. Thank you.</p>'
 
 	msg = MIMEMultipart()
 	msg['From'] = from_email
