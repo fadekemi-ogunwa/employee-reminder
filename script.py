@@ -55,7 +55,7 @@ def employee_anniversary(per_page, current_page, anniversaries=[]):
 
 			employee = { "fullname": str(row["first_name"], ) + " " + str(row["last_name"],), "anniversary_date": current_year_employment_date.strftime('%Y-%m-%d'), "employed_date": employed_date_obj.strftime('%Y-%m-%d'), "number_of_years": year_difference, "Dietary_Restrictions": row["dietary_restrictions"]}
 
-			Post to Yammer
+			# Post to Yammer
 			if days_left == 0 and year_difference > 0:
 				if count % 8 == 0:
 					sleep(35)
