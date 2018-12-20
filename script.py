@@ -44,15 +44,18 @@ def employee_anniversary(per_page, current_page, anniversaries=[]):
 	for row in json_data['profiles']:
 		today = datetime.today()
 		if row['start_date']:
-			employed_date_obj = datetime.strptime(row['start_date'], '%Y-%m-%d') 
-			year_difference = today.year - employed_date_obj.year
+			employed_date_obj = datetime.strptime(row['start_date'], '%Y-%m-%d')
+			year_difference = today.year - employed_date_obj.year 
+			if employed_date_obj.month == 1 and today.month == 12:
+				year_difference = year_difference + 1
+				 
+			current_year_employment_date = employed_date_obj + relativedelta(years=year_difference) 
 
-			current_year_employment_date = employed_date_obj + relativedelta(years=year_difference)
 			days_left = (current_year_employment_date - today).days + 1
 
 			employee = { "fullname": str(row["first_name"], ) + " " + str(row["last_name"],), "anniversary_date": current_year_employment_date.strftime('%Y-%m-%d'), "employed_date": employed_date_obj.strftime('%Y-%m-%d'), "number_of_years": year_difference, "Dietary_Restrictions": row["dietary_restrictions"]}
 
-			# Post to Yammer
+			Post to Yammer
 			if days_left == 0 and year_difference > 0:
 				if count % 8 == 0:
 					sleep(35)
