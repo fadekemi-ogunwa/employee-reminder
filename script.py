@@ -1,4 +1,5 @@
 #!/bin/bash
+# encoding=utf8
 import yampy
 import os
 import requests
@@ -11,6 +12,9 @@ import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from time import sleep
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 
 
@@ -52,7 +56,8 @@ def employee_anniversary(per_page, current_page, anniversaries=[]):
 			current_year_employment_date = employed_date_obj + relativedelta(years=year_difference) 
 
 			days_left = (current_year_employment_date - today).days + 1
-
+			# print(i)
+			# print(row["first_name"], row["last_name"], row["dietary_restrictions"])
 			employee = { "fullname": str(row["first_name"], ) + " " + str(row["last_name"],), "anniversary_date": current_year_employment_date.strftime('%Y-%m-%d'), "employed_date": employed_date_obj.strftime('%Y-%m-%d'), "number_of_years": year_difference, "Dietary_Restrictions": row["dietary_restrictions"]}
 
 			# Post to Yammer
